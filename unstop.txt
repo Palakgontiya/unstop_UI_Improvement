@@ -1,0 +1,40 @@
+1. We need to show the Jobs according to the data recieved from the client.
+2. we will be taking the following details from the user while he/she is signing in:
+	a. Name
+	b. email
+	c. graduation details
+	d. github profile
+	e. linkedIn profile
+	f. resume link/portfolio website link
+	g. current location
+	h. contact number
+	i. skills
+	j. project link
+	
+
+3. we need to show the live jobs only for which the applications are being accepted/ also according to the skillset and education of the user
+4. filters: location, recent, fulltime, part time, internships, experience, category
+5. there will a saperate tabs for applied, saved, hidden and expired jobs
+6. the jobs for which the user has already applied should be shown in the applied section only not in recommendations.
+7. there should be an option for seeing the Applied and Expired jobs
+8. If a person not having Resume then we will take some more information like Experience related info , 
+	project liks and discription, intrests, detailed qualification etc. For building the resume. 
+
+
+for the Card UI We are planning to showcase some important informations
+
+1. Name of the Company/logo
+2. job title
+3. The qualification required for the job
+4. skill set along with the matched skills highlighted
+5. Deadline to apply that job
+6. remaining days to deadline
+7. location
+8. experience required
+9. a Hide/Not intrested, Save, Apply button
+8. date posted
+
+we can also try to make an Application tracker which will help the users track their application
+If any user is not having Resume then we can impliment a resume Builder also
+
+

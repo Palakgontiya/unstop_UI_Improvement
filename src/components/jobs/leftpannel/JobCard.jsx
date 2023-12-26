@@ -18,7 +18,7 @@ const JobCard = ({ logo, companyName, title, impressions, deadline }) => {
           <img
             src={`public/images/${logo}.png`}
             alt=""
-            className="w-[95%] h-[95%] object-cover "
+            className="w-[95%] h-[95%] object-cover p-3"
           />
         </div>
         <div className="px-1 w-[80%] h-[5rem] flex flex-col justify-center items-center  rounded-lg">

@@ -40,7 +40,7 @@ const JobView = () => {
   ];
 
   return (
-    <div className=" w-[49rem] rounded-xl">
+    <div className=" rounded-xl">
       {JD.map((data, index) => (
         <JobViewCard
           key={index}

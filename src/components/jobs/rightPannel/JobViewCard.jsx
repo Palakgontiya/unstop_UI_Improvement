@@ -4,6 +4,8 @@ import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
+
+
 import TagComp from "../../tags/TagComp";
 import Button from "../../buttons/Buttons";
 
@@ -24,11 +26,11 @@ const JobViewCard = ({
   return (
     <div className="w-full flex flex-col gap-1 rounded-xl">
       <div className="w-full flex flex-col bg-white rounded-xl">
-        <div className=" w-full py-3 px-3  flex justify-between items-center rounded-xl  ">
+        <div className=" w-full py-3 px-3  flex gap-4 rounded-xl  ">
           <div className="w-[6rem] h-[6rem] border border-[#F1F5F7] rounded-lg flex justify-center items-center">
             <img
               src={`public/images/${logo}.png`}
-              className="w-[95%] h-[95%] object-cover "
+              className="w-[95%] h-[95%] object-cover p-3"
             />
           </div>
           <div className="px-1 w-[80%] h-[6rem] flex flex-col justify-start items-center">
@@ -42,9 +44,7 @@ const JobViewCard = ({
                 }
                 text={companyName}
                 icon={<HiOutlineBuildingOffice2 />}
-              >
-                
-              </Button>
+              ></Button>
             </div>
             <div className=" flex justify-start items-center w-full gap-2 mt-3">
               <Button
@@ -130,26 +130,32 @@ const JobViewCard = ({
           <div className="w-full p-4">
             <ul className="list-disc">
               {responsibilities.map((responsibility, index) => (
-                <li key={index} className="text-[0.9rem] text-[#315788] font-900">{responsibility}</li>
+                <li
+                  key={index}
+                  className="text-[0.9rem] text-[#315788] font-900"
+                >
+                  {responsibility}
+                </li>
               ))}
             </ul>
           </div>
         </div>
         <div className="flex flex-col">
-          <h2 className="text-[#315788] font-bold text-sm">
-            Requirements:
-          </h2>
+          <h2 className="text-[#315788] font-bold text-sm">Requirements:</h2>
           <div className="w-full p-4">
             <ul className="list-disc">
               {requirements.map((requirement, index) => (
-                <li key={index} className="text-[0.9rem] text-[#315788] font-900">{requirement}</li>
+                <li
+                  key={index}
+                  className="text-[0.9rem] text-[#315788] font-900"
+                >
+                  {requirement}
+                </li>
               ))}
             </ul>
           </div>
         </div>
-       
       </div>
-      
     </div>
   );
 };

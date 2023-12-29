@@ -4,19 +4,58 @@ import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import Button from "../../buttons/Buttons";
 import { useState } from "react";
 
-const JobCard = ({ logo, companyName, title, impressions, deadline }) => {
+const JobCard = ({
+  id,
+  companyLocation,
+  jobLocation,
+  logo,
+  companyName,
+  title,
+  impressions,
+  deadline,
+  experience,
+  jobDescription,
+  responsibilities,
+  requirements,
+  hashtags,
+  setJobdes,
+  isSelected,
+  handleJobClick,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleClick = () => {
+    setJobdes({
+      id,
+      logo,
+      deadline,
+      impressions,
+      companyLocation,
+      companyName,
+      title,
+      jobLocation,
+      jobDescription,
+      responsibilities,
+      requirements,
+      hashtags,
+      experience,
+    });
+    handleJobClick();
+  };
 
   return (
     <div>
       <div
-        className=" w-[24rem] py-2 px-3 border border-[#e7ebec] flex justify-between items-center rounded-xl bg-white "
+        className={`w-[24rem] py-2 px-3 border ${
+          isSelected ? " border-blue-600" : "border-[#e7ebec]"
+        } flex justify-between items-center rounded-xl bg-white `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onClick={handleClick}
       >
         <div className="w-[5rem] h-[5rem] border border-[#F1F5F7] rounded-lg flex justify-center items-center">
           <img
-            src={`public/images/${logo}.png`}
+            src={`/images/${logo}.png`}
             alt=""
             className="w-[95%] h-[95%] object-cover p-3"
           />

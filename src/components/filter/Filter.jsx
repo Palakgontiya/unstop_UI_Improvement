@@ -80,7 +80,7 @@ const Filter = () => {
   ];
 
   return (
-    <div className="w-full flex bg-white px-3 rounded-xl">
+    <div className="w-full flex bg-white px-3 rounded-xl py-2 ">
       <div className="w-[85%]  flex gap-3 items-center">
         <div className="flex justify-start pr-3 gap-4 h-full border-r-2 border-gray-600 ">
           {filtersData.slice(0, 2).map((filterData) => (

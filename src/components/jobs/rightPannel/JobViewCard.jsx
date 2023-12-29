@@ -5,7 +5,6 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
-
 import TagComp from "../../tags/TagComp";
 import Button from "../../buttons/Buttons";
 
@@ -25,7 +24,7 @@ const JobViewCard = ({
 }) => {
   return (
     <div className="w-full flex flex-col gap-1 rounded-xl">
-      <div className="w-full flex flex-col bg-white rounded-xl">
+      <div className="w-full flex flex-col bg-white rounded-xl sm:w-[767px]">
         <div className=" w-full py-3 px-3  flex gap-4 rounded-xl  ">
           <div className="w-[6rem] h-[6rem] border border-[#F1F5F7] rounded-lg flex justify-center items-center">
             <img

@@ -1,427 +1,47 @@
+import { useState } from "react";
 import JobCard from "./JobCard";
 
-const JobOptions = () => {
-  const jobData = [
-    {
-      id: "1",
-      logo: "globant",
-      title: "React JS Freelancer",
-      companyName: "Triveous",
-      impressions: "5421 Impressions",
-      deadline: "9 Days Left",
-    },
-    {
-      id: "2",
-      logo: "triveous",
-      title: "Web UI Developer (React)",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "7568 Impressions",
-      deadline: "14 Days Left",
-    },
-    {
-      id: "3",
-      logo: "hsbc",
-      title: "React Native Developer",
-      companyName: "Globant",
-      impressions: "2876 Impressions",
-      deadline: "7 Days Left",
-    },
-    {
-      id: "4",
-      logo: "togoteams",
-      title: "Lead React Developer",
-      companyName: "HSBC",
-      impressions: "3999 Impressions",
-      deadline: "22 Days Left",
-    },
-    {
-      id: "5",
-      logo: "itworks",
-      title: "React Native Developer",
-      companyName: "Togo Teams",
-      impressions: "6245 Impressions",
-      deadline: "13 Days Left",
-    },
-    {
-      id: "6",
-      logo: "globant",
-      title: "Web UI Developer (React)",
-      companyName: "Globant",
-      impressions: "8791 Impressions",
-      deadline: "5 Days Left",
-    },
-    {
-      id: "7",
-      logo: "triveous",
-      title: "React JS Freelancer",
-      companyName: "HSBC",
-      impressions: "4321 Impressions",
-      deadline: "18 Days Left",
-    },
-    {
-      id: "8",
-      logo: "itworks",
-      title: "Lead React Developer",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "5566 Impressions",
-      deadline: "11 Days Left",
-    } /* 
-    {
-      id: "9",
-      logo: "hsbc",
-      title: "React Native Developer",
-      companyName: "Triveous",
-      impressions: "7456 Impressions",
-      deadline: "6 Days Left",
-    },
-    {
-      id: "10",
-      logo: "togoteams",
-      title: "React JS Freelancer",
-      companyName: "Togo Teams",
-      impressions: "8900 Impressions",
-      deadline: "17 Days Left",
-    },
-    {
-      id: "11",
-      logo: "triveous",
-      title: "Web UI Developer (React)",
-      companyName: "Globant",
-      impressions: "6423 Impressions",
-      deadline: "12 Days Left",
-    },
-    {
-      id: "12",
-      logo: "hsbc",
-      title: "Lead React Developer",
-      companyName: "Triveous",
-      impressions: "4888 Impressions",
-      deadline: "10 Days Left",
-    },
-    {
-      id: "13",
-      logo: "globant",
-      title: "React Native Developer",
-      companyName: "Togo Teams",
-      impressions: "7211 Impressions",
-      deadline: "16 Days Left",
-    },
-    {
-      id: "14",
-      logo: "itworks",
-      title: "React JS Freelancer",
-      companyName: "HSBC",
-      impressions: "5743 Impressions",
-      deadline: "9 Days Left",
-    },
-    {
-      id: "15",
-      logo: "togoteams",
-      title: "Web UI Developer (React)",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "9034 Impressions",
-      deadline: "21 Days Left",
-    },
-    {
-      id: "16",
-      logo: "hsbc",
-      title: "React Native Developer",
-      companyName: "Globant",
-      impressions: "3421 Impressions",
-      deadline: "8 Days Left",
-    },
-    {
-      id: "17",
-      logo: "triveous",
-      title: "Lead React Developer",
-      companyName: "Togo Teams",
-      impressions: "5555 Impressions",
-      deadline: "20 Days Left",
-    },
-    {
-      id: "18",
-      logo: "itworks",
-      title: "React Native Developer",
-      companyName: "Triveous",
-      impressions: "6799 Impressions",
-      deadline: "15 Days Left",
-    },
-    {
-      id: "19",
-      logo: "globant",
-      title: "Web UI Developer (React)",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "4653 Impressions",
-      deadline: "7 Days Left",
-    },
-    {
-      id: "20",
-      logo: "togoteams",
-      title: "React JS Freelancer",
-      companyName: "HSBC",
-      impressions: "7123 Impressions",
-      deadline: "19 Days Left",
-    },
-    {
-      id: "21",
-      logo: "triveous",
-      title: "Lead React Developer",
-      companyName: "Togo Teams",
-      impressions: "8432 Impressions",
-      deadline: "11 Days Left",
-    },
-    {
-      id: "22",
-      logo: "hsbc",
-      title: "React JS Freelancer",
-      companyName: "Globant",
-      impressions: "6321 Impressions",
-      deadline: "6 Days Left",
-    },
-    {
-      id: "23",
-      logo: "itworks",
-      title: "React Native Developer",
-      companyName: "Triveous",
-      impressions: "5901 Impressions",
-      deadline: "13 Days Left",
-    },
-    {
-      id: "24",
-      logo: "globant",
-      title: "Web UI Developer (React)",
-      companyName: "HSBC",
-      impressions: "4501 Impressions",
-      deadline: "5 Days Left",
-    },
-    {
-      id: "25",
-      logo: "togoteams",
-      title: "Lead React Developer",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "5645 Impressions",
-      deadline: "18 Days Left",
-    },
-    {
-      id: "26",
-      logo: "hsbc",
-      title: "React Native Developer",
-      companyName: "Togo Teams",
-      impressions: "7002 Impressions",
-      deadline: "10 Days Left",
-    },
-    {
-      id: "27",
-      logo: "itworks",
-      title: "React JS Freelancer",
-      companyName: "Globant",
-      impressions: "5892 Impressions",
-      deadline: "14 Days Left",
-    },
-    {
-      id: "28",
-      logo: "togoteams",
-      title: "Web UI Developer (React)",
-      companyName: "Triveous",
-      impressions: "6320 Impressions",
-      deadline: "9 Days Left",
-    },
-    {
-      id: "29",
-      logo: "triveous",
-      title: "Lead React Developer",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "5876 Impressions",
-      deadline: "16 Days Left",
-    },
-    {
-      id: "30",
-      logo: "globant",
-      title: "React Native Developer",
-      companyName: "HSBC",
-      impressions: "4999 Impressions",
-      deadline: "12 Days Left",
-    },
-    {
-      id: "31",
-      logo: "itworks",
-      title: "React JS Freelancer",
-      companyName: "Togo Teams",
-      impressions: "6001 Impressions",
-      deadline: "17 Days Left",
-    },
-    {
-      id: "32",
-      logo: "triveous",
-      title: "Web UI Developer (React)",
-      companyName: "Globant",
-      impressions: "7124 Impressions",
-      deadline: "11 Days Left",
-    },
-    {
-      id: "33",
-      logo: "hsbc",
-      title: "Lead React Developer",
-      companyName: "Triveous",
-      impressions: "5899 Impressions",
-      deadline: "6 Days Left",
-    },
-    {
-      id: "34",
-      logo: "togoteams",
-      title: "React Native Developer",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "6412 Impressions",
-      deadline: "19 Days Left",
-    },
-    {
-      id: "35",
-      logo: "globant",
-      title: "React JS Freelancer",
-      companyName: "Togo Teams",
-      impressions: "7499 Impressions",
-      deadline: "8 Days Left",
-    },
-    {
-      id: "36",
-      logo: "triveous",
-      title: "Web UI Developer (React)",
-      companyName: "HSBC",
-      impressions: "5111 Impressions",
-      deadline: "22 Days Left",
-    },
-    {
-      id: "37",
-      logo: "hsbc",
-      title: "React Native Developer",
-      companyName: "Triveous",
-      impressions: "4000 Impressions",
-      deadline: "13 Days Left",
-    },
-    {
-      id: "38",
-      logo: "togoteams",
-      title: "Lead React Developer",
-      companyName: "Globant",
-      impressions: "6002 Impressions",
-      deadline: "5 Days Left",
-    },
-    {
-      id: "39",
-      logo: "itworks",
-      title: "React Native Developer",
-      companyName: "Togo Teams",
-      impressions: "5123 Impressions",
-      deadline: "18 Days Left",
-    },
-    {
-      id: "40",
-      logo: "globant",
-      title: "Web UI Developer (React)",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "3777 Impressions",
-      deadline: "11 Days Left",
-    },
-    {
-      id: "41",
-      logo: "triveous",
-      title: "React JS Freelancer",
-      companyName: "HSBC",
-      impressions: "4888 Impressions",
-      deadline: "6 Days Left",
-    },
-    {
-      id: "42",
-      logo: "hsbc",
-      title: "Lead React Developer",
-      companyName: "Triveous",
-      impressions: "4777 Impressions",
-      deadline: "20 Days Left",
-    },
-    {
-      id: "43",
-      logo: "itworks",
-      title: "React Native Developer",
-      companyName: "Globant",
-      impressions: "3566 Impressions",
-      deadline: "15 Days Left",
-    },
-    {
-      id: "44",
-      logo: "togoteams",
-      title: "React JS Freelancer",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "2899 Impressions",
-      deadline: "9 Days Left",
-    },
-    {
-      id: "45",
-      logo: "globant",
-      title: "Web UI Developer (React)",
-      companyName: "Togo Teams",
-      impressions: "6777 Impressions",
-      deadline: "14 Days Left",
-    },
-    {
-      id: "46",
-      logo: "triveous",
-      title: "Lead React Developer",
-      companyName: "HSBC",
-      impressions: "5321 Impressions",
-      deadline: "7 Days Left",
-    },
-    {
-      id: "47",
-      logo: "hsbc",
-      title: "React Native Developer",
-      companyName: "Triveous",
-      impressions: "7210 Impressions",
-      deadline: "19 Days Left",
-    },
-    {
-      id: "48",
-      logo: "itworks",
-      title: "React JS Freelancer",
-      companyName: "Globant",
-      impressions: "5678 Impressions",
-      deadline: "8 Days Left",
-    },
-    {
-      id: "49",
-      logo: "togoteams",
-      title: "Web UI Developer (React)",
-      companyName: "ITWorks Infotech Pvt. Ltd",
-      impressions: "6543 Impressions",
-      deadline: "12 Days Left",
-    },
-    {
-      id: "50",
-      logo: "triveous",
-      title: "React Native Developer",
-      companyName: "Togo Teams",
-      impressions: "7123 Impressions",
-      deadline: "16 Days Left",
-    },
-    {
-      id: "51",
-      logo: "globant",
-      title: "Lead React Developer",
-      companyName: "HSBC",
-      impressions: "8999 Impressions",
-      deadline: "10 Days Left",
-    }, */,
-  ];
+const JobOptions = ({ jobData, setJobdes }) => {
+  const userInfo = localStorage.getItem("userInfo");
+
+  const filteredJobs = jobData.filter((job) => {
+    const UserInfoToBeCompared = userInfo.replace(/["']/g, "");
+    const condition =
+      job.segment.trim().toLowerCase() === UserInfoToBeCompared.toLowerCase() &&
+      job.status === "LIVE";
+
+    return condition;
+  });
+
+  const [selectedJobId, setSelectedJobId] = useState(filteredJobs[0].id);
+
+ 
+
+  const handleJobClick = (id) => {
+    setSelectedJobId(id);
+  };
 
   return (
     <div className="flex flex-col gap-2">
-      {jobData.map((job) => (
+      {filteredJobs.map((job) => (
         <JobCard
           key={job.id}
+          id={job.id}
           logo={job.logo}
           title={job.title}
           companyName={job.companyName}
           impressions={job.impressions}
           deadline={job.deadline}
+          setJobdes={setJobdes}
+          companyLocation={job.companyLocation}
+          jobLocation={job.jobLocation}
+          experience={job.experience}
+          jobDescription={job.jobDescription}
+          responsibilities={job.responsibilities}
+          requirements={job.requirements}
+          hashtags={job.hashtags}
+          isSelected={selectedJobId === job.id}
+          handleJobClick={() => handleJobClick(job.id)}
         />
       ))}
     </div>

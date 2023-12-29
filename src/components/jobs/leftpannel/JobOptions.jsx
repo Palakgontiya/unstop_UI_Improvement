@@ -1,21 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import JobCard from "./JobCard";
 
 const JobOptions = ({ jobData, setJobdes }) => {
-  const userInfo = localStorage.getItem("userInfo");
+  const [selectedJobId, setSelectedJobId] = useState(null);
 
-  const filteredJobs = jobData.filter((job) => {
-    const UserInfoToBeCompared = userInfo.replace(/["']/g, "");
-    const condition =
-      job.segment.trim().toLowerCase() === UserInfoToBeCompared.toLowerCase() &&
-      job.status === "LIVE";
-
-    return condition;
-  });
-
-  const [selectedJobId, setSelectedJobId] = useState(filteredJobs[0].id);
-
- 
+  useEffect(() => {
+    setSelectedJobId(jobData[0]?.id);
+  }, [jobData]);
 
   const handleJobClick = (id) => {
     setSelectedJobId(id);
@@ -23,7 +14,7 @@ const JobOptions = ({ jobData, setJobdes }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      {filteredJobs.map((job) => (
+      {jobData.map((job) => (
         <JobCard
           key={job.id}
           id={job.id}

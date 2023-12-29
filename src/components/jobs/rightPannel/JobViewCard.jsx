@@ -14,13 +14,13 @@ const JobViewCard = ({
   title,
   jobLocation,
   experience,
-  hashtags,
+  hashtags = [],
   companyLocation,
   deadline,
   impressions,
   jobDescription,
-  responsibilities,
-  requirements,
+  responsibilities = [],
+  requirements = [],
 }) => {
   return (
     <div className="w-full flex flex-col gap-1 rounded-xl">
@@ -28,7 +28,7 @@ const JobViewCard = ({
         <div className=" w-full py-3 px-3  flex gap-4 rounded-xl  ">
           <div className="w-[6rem] h-[6rem] border border-[#F1F5F7] rounded-lg flex justify-center items-center">
             <img
-              src={`public/images/${logo}.png`}
+              src={`/images/${logo}.png`}
               className="w-[95%] h-[95%] object-cover p-3"
             />
           </div>
@@ -128,14 +128,15 @@ const JobViewCard = ({
           </h2>
           <div className="w-full p-4">
             <ul className="list-disc">
-              {responsibilities.map((responsibility, index) => (
-                <li
-                  key={index}
-                  className="text-[0.9rem] text-[#315788] font-900"
-                >
-                  {responsibility}
-                </li>
-              ))}
+              {Array.isArray(responsibilities) &&
+                responsibilities.map((responsibility, index) => (
+                  <li
+                    key={index}
+                    className="text-[0.9rem] text-[#315788] font-900"
+                  >
+                    {responsibility}
+                  </li>
+                ))}
             </ul>
           </div>
         </div>

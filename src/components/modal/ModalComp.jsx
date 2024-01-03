@@ -4,10 +4,9 @@ import { useEffect, useRef } from "react";
 const ModalComp = ({ saveUserInfo }) => {
   const modalRef = useRef(null);
 
-  const closeModal = (e) => {
-    if (modalRef.current === e.target) {
-      saveUserInfo("All");
-    }
+  const closeModal = () => {
+    const selectedPref = localStorage.getItem("userInfo") || "All";
+    saveUserInfo(selectedPref);
   };
 
   useEffect(() => {
@@ -19,12 +18,8 @@ const ModalComp = ({ saveUserInfo }) => {
     };
   }, []); // Empty dependency array ensures this effect runs only once
 
-  const handleTechnicalClick = () => {
-    saveUserInfo("Technical");
-  };
-
-  const handleNonTechnicalClick = () => {
-    saveUserInfo("Non-Technical");
+  const onOptionChange = (option) => {
+    saveUserInfo(option);
   };
 
   return (
@@ -36,7 +31,7 @@ const ModalComp = ({ saveUserInfo }) => {
       <div className="bg-white w-[36rem] rounded-lg overflow-hidden shadow-lg flex flex-col relative p-8 mt-20">
         <button
           className="absolute top-4 right-4 p-2 rounded-full transition duration-300 hover:bg-gray-300"
-          onClick={() => saveUserInfo("All")}
+          onClick={closeModal}
         >
           <MdOutlineCancel size={24} className="text-gray-700" />
         </button>
@@ -49,9 +44,12 @@ const ModalComp = ({ saveUserInfo }) => {
           <div className="flex gap-4">
             <div
               className="flex flex-col items-center justify-center px-6 py-3 text-white font-semibold rounded-lg transition duration-300 mb-6"
-              onClick={handleTechnicalClick}
+              onClick={() => onOptionChange("Technical")}
             >
-              <div className="w-36 h-36 mr-4" onClick={handleTechnicalClick}>
+              <div
+                className="w-36 h-36 mr-4"
+                onClick={() => onOptionChange("Technical")}
+              >
                 <iframe
                   className="w-full h-full"
                   src="https://lottie.host/embed/0c52ea8b-4d6a-4340-94f3-98d8a2f3db30/G806udsjYh.json"
@@ -64,9 +62,12 @@ const ModalComp = ({ saveUserInfo }) => {
             </div>
             <div
               className="flex flex-col items-center justify-center px-6 py-3 text-white font-semibold rounded-lg transition duration-300 mb-6"
-              onClick={handleNonTechnicalClick}
+              onClick={() => onOptionChange("Non-Technical")}
             >
-              <div className="w-36 h-36 mr-4" onClick={handleNonTechnicalClick}>
+              <div
+                className="w-36 h-36 mr-4"
+                onClick={() => onOptionChange("Non-Technical")}
+              >
                 <iframe
                   className="w-full h-full"
                   src="https://lottie.host/embed/a26681f8-dfe7-45eb-8cd1-5986496ac410/iKSB5Ay9gn.json"

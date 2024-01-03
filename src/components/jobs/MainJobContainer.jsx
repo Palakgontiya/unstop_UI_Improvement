@@ -17,13 +17,15 @@ const MainJobContainer = () => {
   const [searchClick, setSearchClick] = useState(false);
 
   useEffect(() => {
-    document.title = "jobs";
-    const storedUserInfo = localStorage.getItem("userInfo");
-    if (storedUserInfo) {
-      setUserInfo(JSON.parse(storedUserInfo));
-    } else {
-      setIsPopupOpen(true);
+    document.title = "Jobs | Unstop";
+
+    const selectedPref = localStorage.getItem("userInfo");
+    if (selectedPref) {
+      setUserInfo(selectedPref);
+      return;
     }
+
+    setIsPopupOpen(true);
   }, []);
 
   const filteredJobData = useMemo(() => {
@@ -97,9 +99,15 @@ const MainJobContainer = () => {
   }, [userInfo, searchClick]);
 
   const saveUserInfo = (info) => {
-    localStorage.setItem("userInfo", JSON.stringify(info));
+    if (userInfo === info) {
+      setIsPopupOpen(false);
+      return;
+    }
+
+    localStorage.setItem("userInfo", info);
     setUserInfo(info);
     setIsPopupOpen(false);
+    setSearchTerm("");
   };
 
   return (

@@ -7,13 +7,17 @@ import JobView from "../../components/jobs/rightPannel/JobView";
 import ModalComp from "../modal/ModalComp";
 import { MdEdit } from "react-icons/md";
 import { jobData } from "../../mockData";
+import JobViewCardPlaceholder from "./rightPannel/JobViewCardPlaceholder";
 
 const MainJobContainer = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [jd, setJd] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchClick, setSearchClick] = useState(false);
 
   useEffect(() => {
+    document.title = "jobs";
     const storedUserInfo = localStorage.getItem("userInfo");
     if (storedUserInfo) {
       setUserInfo(JSON.parse(storedUserInfo));
@@ -23,19 +27,74 @@ const MainJobContainer = () => {
   }, []);
 
   const filteredJobData = useMemo(() => {
-    if (!userInfo) {
-      return [];
+    if (!userInfo || (userInfo === "All" && !searchTerm)) {
+      return jobData;
     }
-    const filteredJobs = jobData.filter((job) => {
-      const UserInfoToBeCompared = userInfo.replace(/["']/g, "");
-      const condition =
-        job.segment.trim().toLowerCase() ===
-          UserInfoToBeCompared.toLowerCase() && job.status === "LIVE";
 
-      return condition;
+    if (userInfo === "All" && searchTerm) {
+      const result = jobData.filter((job) => {
+        const {
+          title = "",
+          jobDescription = "",
+          companyName = "",
+          responsibilities = [],
+          requirements = [],
+          hashtags = [],
+        } = job;
+
+        const searchableFields = [
+          title,
+          jobDescription,
+          companyName,
+          responsibilities.join(" "),
+          requirements.join(" "),
+          hashtags.join(" "),
+        ].join(" ");
+
+        return searchableFields
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      console.log("result", result);
+      return result;
+    }
+
+    return jobData.filter((job) => {
+      const UserInfoToBeCompared = userInfo.replace(/["']/g, "");
+      const {
+        title = "",
+        jobDescription = "",
+        companyName = "",
+        responsibilities = [],
+        requirements = [],
+        hashtags = [],
+      } = job;
+
+      const searchableFields = [
+        title,
+        jobDescription,
+        companyName,
+        responsibilities.join(" "),
+        requirements.join(" "),
+        hashtags.join(" "),
+      ].join(" ");
+      if (!searchTerm) {
+        return (
+          job.segment.trim().toLowerCase() ===
+            UserInfoToBeCompared.toLowerCase() && job.status === "LIVE"
+        );
+      } else {
+        return (
+          job.segment.trim().toLowerCase() ===
+            UserInfoToBeCompared.toLowerCase() &&
+          job.status === "LIVE" &&
+          searchableFields
+            .toLocaleLowerCase()
+            .includes(searchTerm.toLocaleLowerCase())
+        );
+      }
     });
-    return filteredJobs;
-  }, [userInfo]);
+  }, [userInfo, searchClick]);
 
   const saveUserInfo = (info) => {
     localStorage.setItem("userInfo", JSON.stringify(info));
@@ -44,39 +103,68 @@ const MainJobContainer = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 w-full sm:w-[500px] md:w-[800px] lg:w-[1000px] xl:w-[1199px] ">
+    <div className="max-w-7xl mx-auto px-4 w-full sm:w-full md:w-[95%] lg:w-[90%] xl:w-[88%] custom-scrollbar mb-4 ">
       <div className="flex justify-center items-center h-full">
-        <div className="bg-[#F6F8FA] w-full h-full flex flex-col gap-2   ">
-          {userInfo && (
-            <div className="">
-              <div className="w-full flex justify-start mt-2 gap-2 my-2 ">
-                <div className="flex-1 ">
-                  <SearchBar />
+        <div className="bg-[#F6F8FA] w-full h-full flex flex-col gap-2">
+          {userInfo ? (
+            <div className="sticky top-0 bg-white p-2">
+              <div className="w-full flex justify-between mt-2">
+                <div className="flex-1">
+                  <SearchBar
+                    setSearchTerm={setSearchTerm}
+                    searchTerm={searchTerm}
+                    setSearchClick={setSearchClick}
+                  />
                 </div>
                 <div className="flex-1 flex justify-end">
                   <button
                     onClick={() => setIsPopupOpen(true)}
-                    className=" inline-flex items-center bg-blue-100 text-blue-500 font-semibold py-1 px-4 rounded-full"
+                    className="inline-flex items-center bg-blue-100 text-blue-500 font-semibold py-1 px-4 rounded-full"
                   >
                     <span className="mr-2 text-xs">
-                      Smart Search Preference:{localStorage.getItem("userInfo")}
+                      Smart Search Preference:{" "}
+                      {localStorage.getItem("userInfo")}
                     </span>
-                    <button className="focus:outline-none">
+                    <div className="focus:outline-none">
                       <MdEdit />
-                    </button>
+                    </div>
                   </button>
                 </div>
               </div>
-
               <Filter />
-              <div className={`w-full flex gap-4 my-2 `}>
-                <JobOptions jobData={filteredJobData} setJobdes={setJd} />
-                <JobView jobDetails={jd || filteredJobData[0]} />
+            </div>
+          ) : (
+            <div className="text-center mt-8 text-gray-500">
+              <JobViewCardPlaceholder />
+            </div>
+          )}
+
+          {userInfo && (
+            <div className="w-full flex flex-col sm:flex-row gap-2 my-2 ">
+              {userInfo && (
+                <div
+                  className="left-area  custom-scrollbar pr-1"
+                  style={{ height: "76dvh" }}
+                >
+                  <JobOptions jobData={filteredJobData} setJobdes={setJd} />
+                </div>
+              )}
+
+              <div
+                className="right-area  flex-1 custom-scrollbar pr-1"
+                style={{ height: "76dvh" }}
+              >
+                <JobView
+                  jobDetails={
+                    jd || (filteredJobData.length > 0 && filteredJobData[0])
+                  }
+                />
               </div>
             </div>
           )}
+
           {isPopupOpen && (
-            <div className="w-full h-screen flex justify-center mt-4">
+            <div className="w-full h-[80vh] flex justify-center mt-4">
               <ModalComp saveUserInfo={saveUserInfo} />
             </div>
           )}

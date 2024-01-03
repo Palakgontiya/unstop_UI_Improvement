@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <div className="w-full flex flex-col items-center justify-center bg-[#F6F8FA] relative">
+    <div className="w-full flex flex-col gap-1 items-center justify-center bg-[#F6F8FA] relative ">
       <Navbar />
       <Outlet />
     </div>

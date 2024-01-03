@@ -3,7 +3,7 @@ import FilterModal from "../modal/FilterModal";
 
 const FilterChild = ({ label, selected, style, options }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedfilter, setSelectedFilter] = useState(selected)
+  const [selectedfilter, setSelectedFilter] = useState(selected);
 
   const handleMouseEnter = () => {
     setIsModalOpen(true);
@@ -20,13 +20,16 @@ const FilterChild = ({ label, selected, style, options }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <label className="text-[0.8rem] font-semibold" htmlFor="">
-          {label}
-        </label>
+        <label className="text-[0.8rem] font-semibold">{label}</label>
         <button className={`${style} w-[120px]`}>{selectedfilter}</button>
         {isModalOpen && (
           <div className="absolute bg-gray-100 z-40  border border-gray-300 top-14 rounded-xl ">
-            <FilterModal options={options} optionStyle={style} setIsModalOpen={setIsModalOpen} setSelectedFilter={setSelectedFilter} />
+            <FilterModal
+              options={options}
+              optionStyle={style}
+              setIsModalOpen={setIsModalOpen}
+              setSelectedFilter={setSelectedFilter}
+            />
           </div>
         )}
       </div>

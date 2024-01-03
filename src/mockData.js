@@ -273,7 +273,7 @@ export const jobData = [
   },
   {
     id: "8",
-    logo: "realTtech",
+    logo: "company15",
     segment: "Technical",
     status: "LIVE",
     title: "Fullstack Developer",

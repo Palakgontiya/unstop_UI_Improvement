@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import Filter from "../filter/Filter";
 import SearchBar from "../search/SearchBar";
-import JobOptions from "./leftPannel/JobOptions";
+import JobOptions from "./leftpannel/JobOptions";
 import JobView from "../../components/jobs/rightPannel/JobView";
 
 import ModalComp from "../modal/ModalComp";

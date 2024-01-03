@@ -1,10 +1,6 @@
-
 import JobViewCard from "./JobViewCard";
 
-
 const JobView = ({ jobDetails }) => {
-  
-
   return (
     <div className=" rounded-xl">
       {jobDetails ? (
@@ -24,7 +20,10 @@ const JobView = ({ jobDetails }) => {
           hashtags={jobDetails.hashtags}
         />
       ) : (
-        <div>Loading</div>
+        <div className="flex flex-col gap-6 justify-center items-center w-full text-gray-800 text-xl font-bold">
+          No items Match your search
+          <iframe src="https://lottie.host/embed/cba882e8-ff68-4e74-815c-11fec894d4ca/r76wXWTD0C.json"></iframe>
+        </div>
       )}
     </div>
   );

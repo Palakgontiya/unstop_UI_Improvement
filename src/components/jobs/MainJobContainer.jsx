@@ -147,16 +147,14 @@ const MainJobContainer = () => {
             </div>
           )}
 
-          {userInfo && (
+
             <div className="w-full flex flex-col sm:flex-row gap-2 my-2 ">
-              {userInfo && (
-                <div
-                  className="left-area  custom-scrollbar pr-1"
-                  style={{ height: "76dvh" }}
-                >
-                  <JobOptions jobData={filteredJobData} setJobdes={setJd} />
-                </div>
-              )}
+              <div
+                className="left-area  custom-scrollbar pr-1"
+                style={{ height: "76dvh" }}
+              >
+                <JobOptions jobData={filteredJobData} setJobdes={setJd} />
+              </div>
 
               <div
                 className="right-area  flex-1 custom-scrollbar pr-1"
@@ -169,7 +167,7 @@ const MainJobContainer = () => {
                 />
               </div>
             </div>
-          )}
+     
 
           {isPopupOpen && (
             <div className="w-full h-[80vh] flex justify-center mt-4">
